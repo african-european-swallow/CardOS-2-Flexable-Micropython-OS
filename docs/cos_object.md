@@ -448,13 +448,28 @@ Scroll framebuffer (currently unstable).
 ### blit(fbuf, x, y, key=-1, palette=None) (broken)
 
 Draw framebuffer to screen.
+
+---
+
+### draw()
+
+Push framebuf to memory. DO NOT CALL IN APPLICATION, cos.intent and the kernal handles drawing.
+
 ---
 
 # cos.sd
 
 SD card and file system access.
 
-API coming soon
+---
+
+### is_mounted()
+
+Checks to see if SD card is connected.
+
+```python
+if cos.sd.is_mounted():
+```
 
 ---
 
@@ -462,8 +477,36 @@ API coming soon
 
 Used to launch apps and pass data between them.
 
-API coming soon
+---
 
+### cos.intent.INTENT_KILL_APP
+
+Kills current app and opens the default app.
+
+```python
+yield cos.intent.INTENT_KILL_APP
+```
+
+---
+
+### cos.intent.INTENT_NO_OP
+
+Nothing happens.
+
+```python
+yield cos.intent.INTENT_NO_OP
+```
+
+---
+
+### cos.intent.INTENT_DRAW
+
+Tells the kernal to draw.
+
+```python
+yield cos.intent.INTENT_DRAW
+```
+#yuegbrtfuyqwebgutgbuweqgtgegyuguwsergfuygegygtewsgytuesw
 ---
 
 # cos.hw
