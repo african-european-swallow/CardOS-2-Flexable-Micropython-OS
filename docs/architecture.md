@@ -56,7 +56,7 @@ Applications are independent modules that interact with CardOS2 through the publ
 
 This separation allows applications to remain portable across different hardware configurations without needing to know the details of the underlying device.
 
-# Tasks
+## Tasks
 
 When a call for a task is received, the kernel starts a background task and temporarily pauses normal app execution flow.
 
