@@ -417,26 +417,25 @@ coords = list of points
 
 ---
 
-### text(string, x, y, color, s=1)
+### cos.gfx.text(string, x, y, color, font=None)
 
 Draw text.
 
-s = scale
+font:
+- "small"
+- "normal"
+- "large"
+- "title"
 
 ---
 
-### large_text(...) (deprecated)
-
-Use text() instead.
-
----
-
-### smart_text(string, x, y, color, end=None, s=1, return_spacing=2)
+### cos.gfx.smart_text(string, x, y, color, font=None, end=None, return_spacing=2)
 
 Auto-wrapping text renderer.
 
-- end: wrap X position
-- return_spacing: line spacing in pixels
+end = wrap width
+
+return_spacing = line spacing
 
 ---
 
@@ -455,6 +454,61 @@ Draw framebuffer to screen.
 ### draw()
 
 Push framebuf to memory. DO NOT CALL IN APPLICATION, cos.intent and the kernal handles drawing.
+
+---
+
+### set_font(font)
+
+Sets the current active font.
+
+font (str):
+- "small"
+- "normal"
+- "large"
+- "title"
+
+```python
+cos.gfx.set_font("large")
+```
+
+---
+
+### cos.gfx.get_font(font=None)
+
+Returns font metadata dictionary.
+
+If font is None, returns the currently active font.
+
+Returns:
+{
+    "scale": int,
+    "w": int,
+    "h": int
+}
+
+```python
+f = cos.gfx.get_font()
+```
+
+---
+
+### cos.gfx.font_width(font=None)
+
+Returns font character width in pixels.
+
+```python
+w = cos.gfx.font_width("large")
+```
+
+---
+
+### cos.gfx.font_height(font=None)
+
+Returns font character height in pixels.
+
+```python
+h = cos.gfx.font_height()
+```
 
 ---
 
@@ -510,9 +564,11 @@ yield cos.intent.INTENT_DRAW
 
 ---
 
-### INTENT_RUN_TASK(task_name, func, *args, **kwargs)
+### INTENT_RUN_TASK(task_name, func, *args, **kwargs) 
 
-Run task (func) and save what it returns to cos.task_results with the key of task_name (str). For more information look at cos.task (down below).
+(BROKEN, use cos.run_task() then yield cos.intent.INTENT_NO_OP instead)
+
+Run task (func) and save what it returns to cos.task_results with the key of task_name (str). For more information go to docs/architecture.
 
 ```python
 yield cos.intent.INTENT_RUN_TASK('input', cos.task.input)
@@ -647,9 +703,20 @@ cos.error.clear()
 
 # cos.task
 
-Background task system.
+Storage for common tasks, only one task is avalible at the moment.
 
-API coming soon
+---
+
+### get_text(cos,prompt='',current='')
+
+Prompts the user for a string.
+
+```python
+cos.run_task("age", cos.task.get_text, prompt='What is your age?', current="I am ")
+yield cos.intent.INTENT_NO_OP
+if "age" in cos.task_results:
+    print(cos.task_results.pop('age'))
+```
 
 ---
 
@@ -665,83 +732,84 @@ API coming soon
 
 ---
 
-cos.scr_w
+### cos.scr_w
 
 Screen width in pixels
 
 ---
 
-cos.scr_h
+### cos.scr_h
 
 Screen height in pixels
 
 ---
 
-cos.use_w
+### cos.use_w
 
 Usable width for apps
 
 ---
 
-cos.use_h
+### cos.use_h
 
 Usable height for apps
 
 ---
 
-cos.textw
+### cos.normal_font
 
-Text columns available
+Normal font size defined in settings.
 
----
+Font sizes are:
 
-cos.texth
-
-Text rows available
-
+- 'small'
+- 'normal'
+- 'large'
+- 'title'
+  
 ---
 
 # Runtime Information
 
 ---
 
-cos.running_app
+### cos.running_app
 
 Current running app instance
 
 ---
 
-cos.running_app_name
+### cos.running_app_name
 
 Name of current app
 
 ---
 
-cos.active_task
+### cos.active_task
 
 Current background task
 
 ---
 
-cos.active_task_name
+### cos.active_task_name
 
 Name of active task
 
 ---
 
-cos.task_results
+### cos.task_results
 
 Results of finished tasks
 
 ---
 
-cos.fps
+### cos.fps
 
 Current frame rate
 
 ---
 
-cos.dt
+### cos.dt
 
 Time between frames (seconds)
 
@@ -751,18 +819,18 @@ Time between frames (seconds)
 
 ---
 
-cos.app_intent_override
+### cos.app_intent_override
 
 Intent used when launching apps
 
 ---
 
-cos.taskbar_enabled
+### cos.taskbar_enabled
 
 Whether taskbar is shown
 
 ---
 
-cos.persist (dictionary)
+### cos.persist (dictionary)
 
 Persistent runtime storage shared across apps
