@@ -1,6 +1,6 @@
 # Architecture Overview
 
-CardOS2 is built around a modular architecture designed to separate hardware-specific code from applications. This allows the same applications to run on different devices with little or no modification.
+CardOS2 is built around a modular architecture designed to separate hardware specific code from applications. This allows the same applications to run on different devices with little or no modification.
 
 At the center of the operating system is the kernel, which manages the main event loop and coordinates the system's core components.
 
@@ -48,7 +48,7 @@ The input manager determines which driver provides each capability.
 
 System behavior is configured through a global settings system.
 
-Settings define hardware configuration, display options, enabled drivers, and other system-wide options.
+Settings define hardware configuration, display options, enabled drivers, and other system wide options.
 
 ## Applications
 
@@ -62,7 +62,7 @@ When a call for a task is received, the kernel starts a background task and temp
 
 While a task is active:
 
-- the task is advanced step-by-step by the kernel each frame
+- the task is advanced step by step by the kernel each frame
 - the application does not progress its logic in parallel
 - the app is effectively “held” in place until the task yields back control
 
