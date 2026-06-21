@@ -243,7 +243,7 @@ Some drivers may expose multiple capabilities that map to the same physical inpu
 cos.input.claim_caps(["keyboard", "dpad"])
 ```
 
-**Note:** Capability priority is order-sensitive.
+**Note:** Capability priority is sensitive to order.
 
 ---
 
@@ -290,7 +290,7 @@ cos.input.get_active_capabilities()
 # Notes
 
 - Input updates once per frame
-- Drivers are hot-swappable
+- Drivers are hot swappable
 - Capability system prevents input conflicts
 
 ---
@@ -431,7 +431,7 @@ font:
 
 ### cos.gfx.smart_text(string, x, y, color, font=None, end=None, return_spacing=2)
 
-Auto-wrapping text renderer.
+Auto wrapping text renderer.
 
 end = wrap width
 
