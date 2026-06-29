@@ -39,8 +39,8 @@ class App:
         cos.gfx.set_mode(full_fb=False, auto_clear=True)
         cos.gfx.set_font(cos.normal_font)
         # ===== CONFIG =====
-        MIN_BOX_W = 80*cos.scale   # minimum width per item
-        MIN_BOX_H = 60*cos.scale   # minimum height per item (usually it is -PADDING)
+        MIN_BOX_W = int(80*cos.scale)   # minimum width per item
+        MIN_BOX_H = int(60*cos.scale)   # minimum height per item (usually it is -PADDING)
         TOP_BAR = 12 
         PADDING = 4
         self.TEXT_PADDING = 2
